@@ -89,17 +89,48 @@ h6 {
 }
 
 .hero-section {
-    background: linear-gradient(rgba(75, 83, 32, 0.9), rgba(75, 83, 32, 0.7)), url('https://placehold.co/1200x400/png?text=Museum+Brawijaya+Library');
+    /* background: linear-gradient(rgba(75, 83, 32, 0.9), rgba(75, 83, 32, 0.7)), url('https://placehold.co/1200x400/png?text=Museum+Brawijaya+Library'); */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url("/assets/img/backdrop.png");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     /* Parallax effect */
     color: #fff;
-    padding: 100px 0;
+    padding: 120px 0;
     text-align: center;
     margin-bottom: 30px;
     border-bottom: 5px solid var(--secondary-color);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure carousel images have consistent height */
+.carousel-item img {
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Disable hover effects for carousel images */
+.carousel-item img:hover {
+    opacity: 1;
+    cursor: default;
+    transform: none;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.7);
+    /* Darker semi-transparent background */
+    backdrop-filter: blur(3px);
+    border-radius: 10px;
+    padding: 20px;
+    bottom: 30px;
+}
+
+.carousel-caption h5,
+.carousel-caption p {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    color: #fff !important;
+    /* Ensure text is white */
 }
 
 .hero-section h1 {
@@ -150,48 +181,7 @@ h6 {
 }
 
 /* Print Styles */
-@media print {
 
-    .sidebar,
-    .hero-section,
-    footer,
-    .btn-print,
-    .no-print {
-        display: none !important;
-    }
-
-    .col-md-9 {
-        width: 100% !important;
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-
-    body {
-        background-color: #fff;
-        color: #000;
-    }
-
-    a {
-        text-decoration: none;
-        color: #000;
-    }
-
-    .card {
-        border: 1px solid #ddd;
-        box-shadow: none;
-        break-inside: avoid;
-    }
-
-    .content-section {
-        page-break-inside: avoid;
-        border-bottom: none;
-    }
-
-    h2 {
-        border-bottom: 2px solid #000;
-        padding-bottom: 10px;
-    }
-}
 
 /* 360 Viewer Styles */
 #panorama {
@@ -251,32 +241,292 @@ h6 {
 /* Mobile Optimizations */
 @media (max-width: 768px) {
     .sidebar {
-        position: static;
-        height: auto;
-        border-right: none;
-        border-bottom: 4px solid var(--secondary-color);
-        margin-bottom: 20px;
+        display: none;
+        /* Hide standard sidebar on mobile */
     }
 
     .hero-section {
         padding: 60px 0;
+        text-align: left;
+        /* Better readability on mobile */
     }
 
     .hero-section h1 {
         font-size: 2rem;
+        line-height: 1.3;
+    }
+
+    .hero-section .lead {
+        font-size: 1.1rem;
+    }
+
+    /* Typography Adjustments */
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    h4 {
+        font-size: 1.3rem;
+    }
+
+    p,
+    li {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Spacing & Layout */
+    .content-section {
+        padding: 30px 0;
+        scroll-margin-top: 80px;
+        /* Adjust for any fixed headers if added */
+    }
+
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    /* Sticky Mobile Navbar */
+    .navbar.sticky-top {
+        top: 0;
+        z-index: 1030;
     }
 
     /* Improve touch targets */
     .nav-link,
     .btn,
-    .accordion-button {
-        min-height: 44px;
+    .accordion-button,
+    .list-group-item {
+        min-height: 48px;
+        /* Recommended touch target size */
         padding: 12px 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Responsive Tables */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Card Adjustments */
+    .card {
+        margin-bottom: 20px;
+    }
+
+    .gallery-item img {
+        height: 180px;
+        /* Slightly smaller on mobile */
+    }
+
+    /* Carousel Mobile Adjustment */
+    .carousel-item img {
+        height: 250px;
+    }
+
+    .carousel-caption {
+        display: block !important;
+        /* Show caption on mobile if possible, or hide if too cluttered */
+        padding: 10px;
+        bottom: 10px;
+    }
+
+    .carousel-caption h5 {
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+
+    .carousel-caption p {
+        font-size: 0.8rem;
+        margin-bottom: 0;
+        display: none;
+        /* Hide description on very small screens */
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
     }
 }
 
 /* Offcanvas Sidebar Override for Mobile */
 .offcanvas-start {
-    width: 80%;
-    max-width: 300px;
+    width: 85%;
+    max-width: 320px;
+    border-right: 4px solid var(--secondary-color);
+}
+
+/* Global Image Popup Styles */
+img {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+img:hover {
+    opacity: 0.9;
+}
+
+/* Ensure modal image fits nicely */
+#globalModalImage {
+    max-height: 85vh;
+    /* Reduced slightly to make room for caption */
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    /* Smooth zoom transition */
+    cursor: zoom-in;
+}
+
+#globalModalImage.zoomed {
+    transform: scale(2);
+    cursor: zoom-out;
+    max-height: none;
+    /* Allow it to grow beyond screen height when zoomed */
+}
+
+/* Global Typography Improvements */
+body {
+    line-height: 1.7;
+    /* Improved line height for readability */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    letter-spacing: 0.02em;
+    /* Slight spacing for headers */
+}
+
+p {
+    margin-bottom: 1.25rem;
+}
+
+/* Hero Flipbook Button */
+.btn-hero-flipbook {
+    background-color: #ffffff;
+    /* White Background */
+    color: var(--primary-color);
+    /* Army Green Text */
+    border: 2px solid #ffffff;
+    border-radius: 50px;
+    padding: 12px 35px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    /* Bolder text */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    /* Increased letter spacing */
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-hero-flipbook:hover {
+    background-color: var(--secondary-color);
+    /* Dark Gold on Hover */
+    border-color: var(--secondary-color);
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Modal Close Button */
+.modal-content .btn-close {
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Semi-transparent white background */
+    border-radius: 50%;
+    padding: 0.8rem;
+    opacity: 1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content .btn-close:hover {
+    background-color: #fff;
+}
+
+/* Modal Caption */
+#globalModalCaption {
+    font-size: 1.1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Aesthetic Language Switcher */
+.lang-switch-pill {
+    display: inline-flex;
+    background-color: rgba(75, 83, 32, 0.1);
+    border-radius: 20px;
+    padding: 2px;
+    border: 1px solid var(--primary-color);
+    cursor: pointer;
+    user-select: none;
+}
+
+.lang-switch-pill span {
+    padding: 2px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.lang-switch-pill span.active {
+    background-color: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile Navbar Adjustments */
+.navbar .lang-switch-pill {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+/* Hero Logo Responsive Styles */
+.hero-logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 80px;
+    /* Increased Mobile width */
+    height: auto;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+@media (min-width: 768px) {
+    .hero-logo {
+        top: 30px;
+        left: 40px;
+        width: 120px;
+        /* Increased Desktop width */
+    }
 }
